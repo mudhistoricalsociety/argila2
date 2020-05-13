@@ -1,0 +1,15 @@
+[CRAFTS]
+craft cookbake subcraft cherrypie command bake
+  fail: You almost cry as you pull out the smoking, horribly burnt pie out of the oven.
+ clans: 
+  phase
+    1st:  You fill $1 with $2.
+    3rd:  $n fills $1 using $2.
+      t:  30
+      1:  (in-room 5 3 65536 65536)
+  phase
+    1st:  You pull $3 out of the oven and set it aside to cool.
+    3rd:  $n pulls $3 out of the oven and sets it aside to cool.
+      t:  10
+end
+[end-crafts]

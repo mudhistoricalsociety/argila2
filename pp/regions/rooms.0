@@ -1,0 +1,37 @@
+#0
+The Void~
+   This is the MUD's base room.
+~
+0 -2147416823 0
+0
+S
+#70
+The Ampitheatre~
+   This is the Ampitheatre, where you can hold large meetings.
+~
+0 -1006567416 0
+0
+S
+#111
+The OOC Guest Lounge~
+   This is the OOC area where guest users log in.
+~
+0 67178792 6
+0
+S
+#71
+Linkdeath Holding Room~
+   This is where PCs are temporarily stored when they lose link 
+during combat. 
+~
+0 1073807360 0
+0
+S
+#1
+Trial by Fire~
+Lots of fire stuff.
+~
+0 1140916224 0
+0
+S
+$~

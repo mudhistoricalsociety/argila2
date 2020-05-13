@@ -1,0 +1,70 @@
+============+++++++++++============   
+Building: Crafts
+
+The CRAFT command is our craft OLC's equivalent to the OBJECT
+and MOBILE commands. Essentially, when entered by itself, it
+lists all crafts currently in-game. When given an argument,
+and that argument corresponds to the subcraft name of an
+existing craft, it opens that craft for editing. Once a craft
+is opened for editing, typing CRAFT by itself again will show
+all stored information on that craft.
+
+Its first use is to access a player's list of crafts, with:
+
+       craft <player name>
+
+It can also be used to initialize a new craft, using:
+
+       craft new <craft> <subcraft> <command>
+
+Additionally, if you have the craftfile open in your editor,
+you can still obtain the full list of crafts using "craft list".
+Lastly, it can be used to clone an existing craft. When you have
+the craft you wish to clone open in your editor:
+
+       craft clone <new craft> <new subcraft> <new command>
+
+Note that, like everything else, crafts should be developed on
+the builder port; they will swap over with the worldfile.
+
+See Also: Butchering Craft_branching Craft_general General_crafts Materials
+
+craft <subcraft> - opens the editor to modify the subcraft
+
+Building: Cset
+
+The CSET command is used to edit a craft that you've already opened 
+via the CRAFT command. Syntax is as follows:
+
+cset craft <name> - Change the craft's craft name.
+cset subcraft <name> - Change the craft's subcraft name.
+cset command <command> - Change the craft's command.
+cset delete (!) - Delete the currently open craft.
+cset delay X - Sets value of craft's delay timer to X RL hours.
+cset race <name> - Add a required racial type to the craft.
+cset clan <name> (<rank>) - Add a clan/rank requirement to the craft.
+cset sectors <sector> - Add/remove a required room sector.
+cset seasons <season> - Add/remove a required season.
+cset opening <skill> - Designate as opening craft for that skill.
+cset failure <string> - Set the craft's generic failure string.
+cset failobjs <string> - Set the list of failure objects produced.
+cset phaseX 1st - Set the first person echo for phase X.
+cset phaseX 2nd - Set the second person (target) echo for phase X.
+cset phaseX 3rd - Set the third person (room) echo for phase X.
+cset phaseX failure-1st - Set the first-person failure string for phase X.
+
+cset phaseX failure-2nd - Set the second-person failure string for phase X.
+cset phaseX failure-3rd - Set the third-person failure string for phase X.
+cset phaseX flag - Toggle the specified flag on phase X.
+cset phaseX delete - Delete phase X from the craft.
+cset phaseX time - Set the delay interval for phase X.
+cset phaseX movecost Y - Set the move point cost for phase X.
+cset phaseX skill <skill> - Specify the skill used in phase X.
+cset phaseX check YdZ - Specify the die roll of the skill check for phase X.
+cset phaseX objectX <VNUMs> <flag> - Set the objects utilized in phase X.
+cset phaseX objectX xZ <VNUM> <flag> - set the objects utilized in pahse x, and sets Z number of them
+
+(object1 will be $1, or the first group of objects needed/produced)
+(flags are produced, used, in-room, in-inventory, held, wielded, worn)
+cset phaseX mob <VNUM> - Set the specified mob to load up on success.
+

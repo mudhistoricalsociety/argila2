@@ -1,0 +1,152 @@
+November 28, 2006
+Argila2.0 initial
+Lua has been included, and the first trigger, TIMER, has ben enabled. 
+
+Argila1-03 - September 1, 2006
+A number of small fixes, simplification of the makefile, converted C++ comments to C style, allocate memory for pointer to newly init mobs, set default to LINUX in makefile, use getopt to make command-line argument parsing more robust, use socklen_t as type for size of socket, instead of int. Thanks to Sighentist for all of his patches.
+
+Argila1-02 - August 15, 2006
+Fixed the regions/registry file to the Argila1-01 release to deal with combat casuing crash bug. Also, fixed many of the memory issues. Primarily this involves changing lines of the form 
+
+af = malloc(sizeof(AFFECTED_TYPE));
+
+to the form
+
+af = (AFFECTED_TYPE *)alloc(sizeof(AFFECTED_TYPE), 13);
+ 
+ Additionally, all skill related structures are combined into a single structure. The guest login from the first screen has also been removed. These changes are located in nanny.c. A function was added to choose between  greetings.maintenance and the regular greetings menu. Finally, the show v option was tweaked when veiwing the Max-rates option to improve readability.
+
+July 1, 2006
+Bug fixes for most of the warnings generated during compile.
+
+Fix to the admin-pfile.sql that was causing a crash.
+
+June 29, 2006
+OFFICIAL ARGILA 1.0 RELEASE
+Changed race references from numerical to #define references. race == 69 is now race == WOLF. 
+Removed all mythical and fantasy races.
+Removed race specific abilities. No need for orc sunlight checks once orcs were removed.
+
+Added several new wear_locs and allowed hiding of some layers. You can wear a shirt and jacket and the shirt could be hidden.
+
+Removed all Pvaric and unused magic functions and files. The Magic system doesn't work and is replaced by admins of new games, so no point in keeping a Harn specific magic system in place.
+
+Removed Arena.
+
+Added attribute check to crafts.
+
+Fixed bug in rset alas command. Added functionality to stat room command. It will now show all additional descriptions and alas messages.
+
+
+April 5, 2006
+Finished up this phase of leaks. Delete a bunch of unused and out-of-date files. Set-up worldfiles for new Argila zone.
+
+March 29, 2006
+Fixed more leaks. Seperate clan related functions into thier own file.
+
+March 28, 2006
+A large number of memory leaks fixed. Updates to vboard/message board posting. Removed more unused functions. Removed some of the double-freed pointers.
+
+February 23, 2006
+Files, functions and function calls added to begin integration of Lua as a scripting engine. Changed Installation documentation to reflect Argila coding.
+
+File headers comments nearly complete. 
+
+Removed a few unused functions, and began cleaning up the appearance of protos.h 
+
+February 9, 2006
+Fixed a few bugs in the guest login commands. Special guest are disconnected when they are done, and regular guest return to the menu screen.
+
+The Arena is now available to all guests.
+
+Documentation of files and functions continue
+
+February 1, 2006
+Tracked down some minor bugs, and updated code to reflect the use of Zone13 as the offical Argila Zone for demonsration of objects, mobs shops, and rooms.
+
+January 23, 2006
+Future-proofed some ISO problems by changing some variable and function names.
+Changed some variable and function names to increase compatability with C++
+Cleaned up some loops and switches.
+Changed rvnums for Arena to keep it simple
+Cleaned up some shadowed variables
+
+January 21, 2006
+Fixed a few small bugs in money.c
+
+Removed unused parameters in some non-user functions. Others left for future expansion or for  uniformity
+
+Changed exit() to exit(EXIT_SUCCESS) format
+
+Last of sprintf changed to snprintf
+
+Added comments to money.c
+
+January 18, 2006
+Added a file money.c 
+It includes all monny related functions including most shopkeeper functions.
+
+The entire monetary systems is updated. Allows bartering and makes it much easier to add, change or delete monetary items. A lot of old code was stripped out as well to make things more understandable.
+
+New copyright headers on all files
+
+Cleaned up the code for height and frames. Began set up to move racial data to MySQL. 
+
+January 14, 2006
+More small fixes in logic in various files.
+
+Re-ordered wearLocs to head-to-toe order. Cleaned up the code for wear-locs to make changes to locations easier. Added upper-arm wear-locs.
+
+January 8, 2006
+Fixed bugs with OOC and opening doors.
+
+Fixed annoying problem with abbreviated commands: changed do_assay to do_evaluate, re-ordered listing of commands
+
+changed assingment of char* to NULL from \0
+
+Cleared up the logic in several places; removed some empty If statements
+
+Added commentary to a few functions
+
+January 4, 2006
+Removed some unused code regarding moon light out of db.c Code in weather.c was actually used
+
+Fixed some minor bugs with assignments, null pointers, some shift operations,  some break statements, and some fall through case (no preceding break) 
+
+January 2, 2006
+More sprint to snprintf conversions
+Tweaked a section of code that stripped a new line from the acstime function and turned it into it's own function
+Removed some double-defined functions
+Fixed a bunch of un-initiated variables.
+Fixed a problem with aplhabetized abbreviated commands
+
+December 30, 2005
+More sprintfs changed to snprintf
+Removed document type from do_document command (Used by old HL code only)
+Assorted fixes to type casting
+Enabled Guest login from account screen
+
+
+December 25, 2005
+Functions not using return values marked (void)
+Alphabetized commands and immcommands
+
+
+December 22, 2005
+Assorted bug fixes for double defined macros, empty IF statements, some boolean checks, dangling pointers, and initial sizes for some arrays.
+Enabled quilted armor type.
+
+
+December 20, 2005
+Added rooms, some objects and mobs to allow Arena to work. Weapons still needed
+
+
+December 16, 2005
+Fixed Guest logins from first screen, added a room in zone 1 so look Window works
+
+
+December 15, 2005
+Generalized do_compare function
+Added new command do_asses: guess weight, based on SCAN skill, fullness of light sources, contents of drink containers, contents of non-drink containers
+Changes to GuestAvatar, and main menu
+Commentary added in various files

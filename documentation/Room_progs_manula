@@ -1,0 +1,251 @@
+Room Programing Manual (RPROGS) version 1.0
+17 March, 2005
+
+Written by:
+Auroness
+auroness@gmail.com
+
+	"Writing room programs can be difficult at first, but they
+	significantly increase the game's "reality" -- please use
+	them liberally."
+	Sat May 14 00:08:53 2003, by Traithe
+	
+In an attempt to ease the difficulty of writing these programs, I have written this manual. The first section allows you to set up and maintain all of the programs you want in your rooms. The second section has all of the commands you will need to make the programs work. Then in the third section, I have given some examples, first explaining a few tricky parts, then some example programs you can use in your games showing how it all works together. Finally, I end with credits to those who inspired me to write this. 
+
++++++++++++++++++++++ To Create RPROGS +++++++++++++++++++++++++
+
+rpadd
+	 Usage: rpadd 
+	 Adds a new room program to the end of the current program list. 
+
+rpcmd
+	Usage: rpcmd <prog#> <word(s)>
+	Adds a command word to the room program. A command word is the first word 
+	of a two-word trigger for the room; usually, the action verb of a two-word 
+	phrase. Multiple words can be added using this command. 
+	
+rpkey
+	Usage: rpkey <prog#> <keyword(s)>
+	Sets the second word of a two-word "trigger phrase" for a room program. 
+	This is usually a word located in the room description, and is paired 
+	with an RPCMD word(s). 
+	
+rpapp
+	Usage: rpapp <prog#>
+	This command allows you to append additional lines 
+	of code to an existing room program using the SOI editor.
+	
+rpstat
+	Usage: rpstat
+	Shows the commands, keywords and programs of all 
+	room programs in your current room.
+	
+rpdel
+	Usage: rpdel <number>
+	Using this command, a staff member may delete the 
+	specified room program. As programs are deleted, they are re-ordered, so 
+	be sure to check the numbers before you make any other changes.
+	
++++++++++++++++++++++ Program Statements +++++++++++++++++++++++++
+
+atecho
+	Useage: atecho <room#> <message>
+	Sends a message to the room specified
+	
+ostr
+	Useage: ostr <string>
+	Sends a message to the observors in the current room.
+		 
+vstr 
+	Useage: vstr <string>
+	Sends a message to the character who triggered the program.
+				 
+atlook
+	Useage: atlook <room#>
+	As if the character looked into room #
+		
+trans
+	Useage: trans <room#>
+	Transfers trigger-puller to room#
+
+rftog
+	Useage: rftog <flag> <room#>
+	Toggles the flag in the room #
+
+link		
+	Useage: link <source room#> <direction> <target room#>
+	Creates a two-way link between the rooms
+	
+unlink	
+	Useage: unlink <direction> <room#>
+	Removes the two-way link from the room, 
+	in the direction specified
+	
+exit
+	Useage: exit <source room> <direction> <target room>
+	Creates a one-way link from source to target
+	
+unexit	
+	Useage: <direction> <room#>
+	Removes the one-way link from the room, 
+	in the direction specified. Remember, the exit does not exist 
+	in one room, so you must remove it from the room where it 
+	does exist.
+		
+give
+	Useage: give <obj vnum>
+	Gives the object to the character that triggered the program. 
+	If their hands are full, the object is put on the floor. 
+
+take								
+	Useage: take <obj vnum>
+	Takes the object from the hands of the trigger-puller
+	
+put
+	Useage: put <obj vnum> <room#>
+	Puts the object in room specified
+	
+get 
+	Useage: get <obj vnum> <room#>
+	Removes all of the specified objects from room, 
+	and from any containers in the room, 
+	but not from the character.
+	
+	
+force
+ 	Useage: force <mob vnum> <room #> <command>
+ 	Forces the mob to do the command. Use -1 for the mob vnum to make 
+ 	it work on the trigger person
+
+loadmob
+	Useage: loadmob <mob vnum> <room#>
+	Loads  a mob into room specified
+
+exmob
+	Useage: exmob <mobname> <room#>		*You must use the name, not the vnum
+	Removes the mob with mobname from room specified, and hope the players 
+	are careful, because you can *remove* a player if his name matches.
+	For example, exmob wolf 1,  will get rid of the first mobile in the 
+	with "wolf" in his name, even if it is a PC.
+	
+pain
+	Useage: pain <room#> <low damage> <high damage> all 
+	Causes damage to all character ranging from <low> to <high>.
+	example: pain 1001 5 25 all
+	
+if link
+	Usage: if link(room#, dir)   *yes, you need the parenthesis
+	Checks to see if a link exist in the given room and direction
+	example: if link(202,n)
+	
+if mexist
+	Usage: if mexist(mob vnum, room#) *yes, you need the parenthesis
+	Check to see if a mob exists in a given room 
+
+if haso
+	 Usage: if haso(mob vnum,obj vnum)	*yes, you need the parenthesis
+	 Check to see if mob/player has object (also checks equipment)
+	 Only checks in current room. To denote player use -1 for mob num. 
+
++++++++++++++++++++++ Examples +++++++++++++++++++++++++
+
+
+Example-->IF FI 
+[--------------
+if link(1001,n)
+vstr There is an exit to the north
+fi done
+--------------]
+
+If there is a link in room 1001, going north, then send a message to the character who triggered the program. The major point here is the DONE after the FI. There has to be an argument for the FI statement to make it work right. You can use END or whatever you want.
+
+Example -->IF ELSE FI
+[--------------
+if link(1001,n)
+vstr There is an exit to the north
+else do 
+vstr There is no way out!
+fi done
+--------------]
+
+If there is a link then send a message, else send the other message. The important thing to note is the presence of the DO after the ELSE. Again, the ELSE statement needs an argument. You can use any word, but it makes sense to to me to use DO. 
+
+
+Example --> All together now
+[--------------
+if link(202,w)
+vstr exit to the west
+fi done
+
+vstr This is your last warning!
+
+if haso(-1,287)
+vstr she has the mint!
+else do
+vstr no mint here
+fi done
+
+vstr Now they all know who has the mint.
+--------------]				
+
+A simple IF statement, then a print statement, followed by an IF-ELSE statement, and finally, another print statment. 
+
+
+Now, a few programs for you to show how it all works together. 
+
+Example --> Wishing Well
+
+Room 1001 is a courtyard to a castle with a stone well. Room 202 is a treasure  room at the top of a tower with no entrance or exits. The characters are standing in room 1001.
+
+[--------------
+rpadd 
+rpcmd 1 toss pitch
+rpkey 1 copper 
+rpapp 1
+
+atecho 1001 The coin bounces off of the walls of the well, the echoes getting weaker and and weaker as it falls.
+
+if link(1001,n)
+	unlink n 1001
+fi done
+
+vstr Suddenly you feel weak in the knees.
+trans 202
+atecho 202 You feel like something has changed....
+
+ostr You see n$ stagger then disappear in a puff of smoke.
+--------------]
+
+What do they expect for a copper? Any links tp the north are removed, and the PC who tossed the copper gets transfered to the treasure room with a helpful message once he arrives. All his companions see is a big puff of smake. Other programs are written to account for silver, gold and stones being tossed. Silver gets them a one-way exit, gold gets a two exit, and stone....
+
+[--------------
+rpadd 
+rpcmd 4 toss pitch
+rpkey 4 stone rock pebble 
+rpapp 4
+
+rftog dark 1001
+
+loadmob 1863 1001
+loadmob 1863 1001
+loadmob 1863 1001
+loadmob 1863 1001
+
+vstr You have a very bad feeling about this!
+ostr What happened to the lights?
+
+atecho 1001 Suddenly, strange blue and green flames erupt from the well....
+
+pain 1001 5 25 all
+--------------]
+The room becomes dark, 4 mobs are loaded, and a couple helpful messages are given. Then the fun begins.
+
+This should be enough to get you started. 
+
+	
++++++++++++++++++++++ CREDIT +++++++++++++++++++++++++
+
+This manual is dervived from various help files, the code itself, posts at the Shadows of Isildur forum, and hours of trial and error. It is my contribution to the RPI community. My thanks to Sighentist, Dragongold, Tsheller, HaiWolfe, and of course, Traithe, as well as all of the others at http://www.middle-earth.us/forums/viewforum.php?f=31. 
+
+As with all programming, be careful with it, and don't blame me when your computer crashes.  If you have any comments or helpful advice, you can post at the forum or email me. Please direct all questions to the forum. 
+

@@ -1,0 +1,430 @@
+#15
+enter~
+enter~
+#999
+mobact~
+var integer i
+if (i==0)
+ci "mount stallion"
+i = 1
+endif
+~
+#902
+mobact~
+
+~
+#902
+hour~
+ci "track 3214"
+~
+#4
+mobact~
+var integer vnum
+var integer action
+var char_data pers
+var room_data food
+vnum = 121
+if (action <> 1)
+action = 1
+food = vnum->room
+pers = (food->people)
+while (person)
+ci "load"
+delay 2
+ci "aim d " person->realname
+delay 15
+pers = pers->next_in_room
+endwhile
+action = 0
+endif
+~
+#1100
+hour~
+var integer x
+var integer y
+
+y = number(1,5)
+
+if ( mud_hour == 20 )
+  ci "emote stretches, rolling his head on his shoulders with a satisfied sigh."
+  delay 5
+  ci "say (smiling to himself) Off to the Shield with me!"
+  delay 5
+  ci "emote packs away his pie cart, nodding gruffly."
+  delay 5
+  ci "clockout"
+  while ( mob->in_room != 1023 )
+    ci "track 1023"
+    delay 8
+  endwhile
+  if ( mob->in_room == 1023 )
+    ci "open door west"
+    ci "west"
+    delay 10
+    ci "close door east"
+    delay 5
+    ci "emote tips *hat to the Shield's patrons, making his way to the bar after a long day of work."
+    delay 3
+    ci "sit bar"
+    delay 15
+    ci "emote visibly relaxes, striking up a muted conversation with the barkeep."
+    delay 4
+    ci "tell kieran (smiling tiredly) The usual, if you would."
+    delay 5
+    ci "buy kieran tankard"
+    delay 5
+    ci "emote nods, raising *tankard in thanks and taking a long pull, sighing in contentment."
+    delay 5
+  endif
+endif
+
+if ( mob->in_room == 1108 )
+  ci "drink tankard"
+endif 
+
+if ( mud_hour == 6 )
+  if ( mob->in_room == 1108 )
+    ci "junk tankard"
+    delay 2
+    ci "emote rises slowly from the bar, looking around."
+    ci "stand"
+    delay 10
+    ci "say (sighing) Back to work with me!"
+    delay 3
+    ci "smile"
+    delay 3
+    ci "emote tips *hat to those assembled, before making his way out."
+    delay 5
+    ci "open door east"
+    ci "east"
+    delay 10
+    ci "close door west"
+    ci "clockin"
+  endif
+endif
+
+if ( mob->in_room != 1108 )
+  delay number(1,15)
+  if ( y == 1 )
+    ci "shout Get your fresh meat-pies! Get 'em here!"
+  elseif ( y == 2 )
+    ci "shout Meat-pies for sale! The Steward's favorite, only three pence!"
+  elseif ( y == 3 )
+    ci "shout Fit for an Elven lord, indeed! Get yer meat-pies here!"
+  elseif ( y == 4 )
+    ci "shout Royal sustenance, fer sale here! Get your meat-pies, only three pence!"
+  elseif ( y == 5 )
+    ci "shout Meat-pies for sale, only three pence!"
+  endif
+endif
+
+~
+#1901
+mobact~
+var integer fstarted_one
+if (fstarted_one == 0)
+fstarted_one = 1
+ci "set sprint"
+ci "cartone leave_up"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "cartone arrive"
+delay 60
+ci "cartone leave_up"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "cartone arrive"
+delay 60
+ci "cartone leave_up"
+while (mob->in_room <> 1493)
+delay 4
+ci "track 1493"
+endwhile
+ci "cartone arrive"
+delay 60
+ci "cartone leave_down"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "cartone arrive"
+delay 60
+ci "cartone leave_down"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "cartone arrive"
+delay 60
+ci "cartone leave_down"
+while (mob->in_room <> 1464)
+delay 4
+ci "track 1464"
+endwhile
+ci "cartone arrive"
+delay 60
+fstarted_one = 0
+endif
+~
+#1902
+mobact~
+var integer fstarted_two
+if (fstarted_two == 0)
+fstarted_two = 1
+ci "set sprint"
+ci "carttwo leave_down"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "carttwo arrive"
+delay 60
+ci "carttwo leave_down"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "carttwo arrive"
+delay 60
+ci "carttwo leave_down"
+while (mob->in_room <> 1464)
+delay 4
+ci "track 1464"
+endwhile
+ci "carttwo arrive"
+delay 60
+ci "carttwo leave_up"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "carttwo arrive"
+delay 60
+ci "carttwo leave_up"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "carttwo arrive"
+delay 60
+ci "carttwo leave_up"
+while (mob->in_room <> 1493)
+delay 4
+ci "track 1493"
+endwhile
+ci "carttwo arrive"
+delay 60
+fstarted_two = 0
+endif
+~
+#1903
+mobact~
+var integer fstarted_three
+if (fstarted_three == 0)
+fstarted_three = 1
+ci "set sprint"
+ci "cartthree leave_down"
+while (mob->in_room <> 1464)
+delay 4
+ci "track 1464"
+endwhile
+ci "cartthree arrive"
+delay 60
+ci "cartthree leave_up"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "cartthree arrive"
+delay 60
+ci "cartthree leave_up"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "cartthree arrive"
+delay 60
+ci "cartthree leave_up"
+while (mob->in_room <> 1493)
+delay 4
+ci "track 1493"
+endwhile
+ci "cartthree arrive"
+delay 60
+ci "cartthree leave_down"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "cartthree arrive"
+delay 60
+ci "cartthree leave_down"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "cartthree arrive"
+delay 60
+fstarted_three = 0
+endif
+~
+#1904
+mobact~
+var integer fstarted_four
+if (fstarted_four == 0)
+fstarted_four = 1
+ci "set sprint"
+ci "cartfour leave_up"
+while (mob->in_room <> 1493)
+delay 4
+ci "track 1493"
+endwhile
+ci "cartfour arrive"
+delay 60
+ci "cartfour leave_down"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "cartfour arrive"
+delay 60
+ci "cartfour leave_down"
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "cartfour arrive"
+delay 60
+ci "cartfour leave_down"
+while (mob->in_room <> 1464)
+delay 4
+ci "track 1464"
+ci "cartfour arrive"
+endwhile
+ci "cartfour leave_up"
+delay 60
+while (mob->in_room <> 1494)
+delay 4
+ci "track 1494"
+endwhile
+ci "cartfour arrive"
+delay 60
+ci "cartfour leave_up"
+while (mob->in_room <> 1495)
+delay 4
+ci "track 1495"
+endwhile
+ci "cartfour arrive"
+delay 60
+fstarted_four = 0
+endif
+~
+#3031
+hour~
+var integer i
+i = number(1,50)
+if (i == 1)
+ci "dolay egg"
+ci "emote makes a faint clucking noise as it lays *egg"
+ci "drop egg"
+~
+#3032
+hour~
+if (hour == 1)
+ci "refresh milk"
+endif
+~
+#3032
+mobact~
+~
+#5260
+hour~
+var integer a 
+a = 3 
+while (a>0) 
+ci "n" 
+delay 6 
+ci "e" 
+delay 6 
+ci "emote walks over towards one of the sword-blade casts next to the smelter." 
+delay 8 
+ci "emote pries open the cast, retrieving an iron blade." 
+ci "retrieve blade" 
+delay 12 
+ci "w" 
+delay 6 
+ci "s" 
+delay 6 
+ci "emote picks up the iron blade with a pair of tongs, holding it out into the flames." 
+delay 12 
+ci "emote leans the blade against the anvil, and proceeds to hit it with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "emote strikes the iron blade with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "emote strikes the iron blade with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "emote strikes the iron blade with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "emote holds the iron blade into the flames." 
+delay 10 
+ci "emote leans the blade against the anvil, and proceeds to hit it with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "emote strikes the iron blade with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "emote strikes the iron blade with his hammer." 
+ci "strike blade" 
+delay 10 
+ci "stands up, still holding the blade with his tongs." 
+delay 4 
+ci "n" 
+delay 6 
+ci "emote dips the iron blade into the brackish water." 
+delay 2 
+ci "emote nods with approval as the blade hisses in the water." 
+delay 8 
+ci "s" 
+delay 6 
+ci "emote picks up a simple wooden handle, and slides it onto the thin part of the blade."
+delay 9 
+ci "emote taps the handle with his hammer." 
+ci "finish blade" 
+delay 8 
+ci "s" 
+delay 6 
+ci "e" 
+delay 6 
+ci "e" 
+delay 6 
+ci "emote arranges his blade into the appropriate position on the shelf."
+ci "arrange sword"
+delay 10 
+ci "w" 
+delay 6 
+ci "w" 
+delay 6 
+ci "n" 
+a = (a-1) 
+endwhile
+~
+#5261
+mobact~
+var integer i
+i = number (1,4)
+if (i==1)
+ci "emote wedges his shovel into the heap of iron ore."
+delay 7
+ci "emote throws some iron ore into the flames."
+ci "shovel ore"
+endif
+~
+$~

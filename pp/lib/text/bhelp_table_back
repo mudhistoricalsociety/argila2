@@ -1,0 +1,669 @@
+RECIPE
+
+    Used for the herbalism system, the recipe command allows a detail to
+    list and create various item combinations to yield poisons and
+    potions.  Currently, only food, herb, and component items can be
+    combined to make a useful potion or poison.
+
+    Type "recipe ?" for a complete list of commands and usage.
+#
+HERB HERBALISM PLANT HERBS PLANTS
+
+    The herbalism system is based on in-game plants, which are placed by
+    builders in various parts of the game world.  All plants have the "take"
+    flag removed.  The plant item must have the oval0 flag set to correspond
+    to which herb it yields when it is gathered.
+
+    The plant description should be somewhat ambiguous.  The description of
+    an herb should include the actual name of the herb.
+
+    For example:
+
+    A low-lying plant grows in the shade of a large oak tree.
+
+    some alanal leaves
+
+#
+BOARD BOARDS
+
+A board consists of an "board" object and a board definition.  Here is
+how to create a board definition:
+
+  > board create 1 staff_news 'News about staff events.'
+
+The example above created the a board named "staff_news" that only players
+at trust level 1 or above can read or write to.
+
+The syntax is:
+
+  board create level board-name board-title
+  board save                 (Save board definitions to disk)
+  board delete board-name    (Naturally, delete isn't implemented yet)
+  board                      ("board" by itself lists existing boards)
+
+After a board is created, it must be saved using the "board save" syntax.
+
+The instructions above simply define the board.  For a player to be able
+to use a board, a board object must be created and assigned to an existing
+board.
+
+  > oset board name "staff_news board"
+
+is the building command to define an object as a board.  The object must
+be of type board, and its first name element must be the name of the
+board it represents.
+
+There are a few special predefined boards:
+
+   lesser_oracle     - Messages sent here are from the "lesser oracle" dream
+                       request.
+   lesser_answers    - Answers to lesser_oracle requests by staff appear on
+                       this board for review of others.
+   greater_oracle    - Messages sent by "greater oracle" dream request.
+   greater_answers   - Staff answers to greater oracle.
+   prescience        - Questions posed by players using the psionic 
+                       prescience skill.
+   prescience_answers- Staff answers to prescience.
+
+Staff members may answer lesser/greater oracle questions by using the
+reply command:
+
+  > reply board 10
+
+If your reply were to a message on the lesser_oracle board, then message
+with the same number would be posted to the lesser_answers board, AND a
+dream answer would be attached to the player-requestors pfile.
+
+And, just by the way, once the player receives his/her dream, the player
+can type "dreams" to figure out how many dreams he/she has had, and
+"dreams <nn>" to review a specific dream.
+
+Unix files
+==========
+... lib/boards                - directory containing all board information
+... lib/boards/board_list     - definition of all boards
+... lib/boards/<board>.nnnnnn - A specific message on a board.
+
+Messages are stored as individual unix files in the boards directory.  It
+will not hurt the mud to wholesale delete messages from this directory as
+long as the board_list file is left in-tact.
+
+
+#
+RCRET
+ 
+    Usage: rcret <direction> <difficulty>
+ 
+    RCRET creates a secret description which can only be found 
+    through a succesful use of the SEARCH skill.  The difficulty
+    is a number from 0 to 100.  Note: a difficulty of 50 or greater
+    will be impossible to find.  A good range is 0-20, with a
+    preference to lower numbers.
+ 
+    Once the command is typed, you will go to the editor for the
+    actual description.
+
+#
+REPLACE
+
+   Usage: replace <"object"/"mobile"> <vnum> with <vnum>
+
+   Replace exchanges one equipped item for another across all zones.
+   It is a powerful command, and should be used carefully.  Changes
+   become permanent after a save and reboot.
+
+Example:
+
+ >replace object 10023 with 2501
+ >replace mobile 17901 with 5023
+
+#
+OUTFIT
+
+  Usage: outfit <mob/char name>
+
+   Outfit forces the named mobile or character to pick up and attempt to
+   wear and wield all items on the ground in that room.  It is useful for
+   quickly equiping a newly loaded mob.
+
+Example:
+
+ >outfit guard
+
+#
+OBJECT
+
+    Usage: object | object <vnum/name>
+
+    This is the base object editing command.  Used with an object name or 
+    vnumber it allows the builder to start editing that particular 
+    prototype.  When using a name to edit, that object must be in the 
+    builders inventory, or in the room.Once editing a prototype, the current 
+    statistics can be displayed by typing "object" alone, without any other 
+    fields.
+
+    Newly OINITED objects are automatically in edit mode.
+
+   Examples:
+
+  >object 10002
+  >object sword
+  >object
+
+See Also: OSET OINIT
+
+#
+OSET
+
+   Usage: oset <field> (value)
+
+   Oset is the object editing command whilch actually changes the
+   aspects of a prototype object.  Start editing objects using the OBJECT
+   command.  To get a list of all possible fields, type "oset ?"
+
+  Examples:
+
+ >oset name 'sword long sharp'
+ >oset oval1 5
+
+See Also: OBJECT OINIT
+
+#
+VIS INVIS
+
+     These commands alternately make your immortal visible or invisible
+     to mortal eyes.
+
+
+#
+WEAPON
+    
+    This is a list for weapon oval0-6.  See bhelp OVAL for its
+    usage.
+      oval0 - corresponds to wielding position;
+              0 - primary hand
+              1 - secondary hand
+              2 - can be used in either hand
+              3 - two-handed weapon
+      oval1 - corresponds to number of 'dice' rolled, ex: oval1 2
+      oval2 - corresponds to size of 'dice' rolled, ex: oval2 4
+              with the two previous examples, 2d4.
+      oval3 - corresponds to type of skill weapon requires;
+              1 - club                5 - axe
+              2 - spear               6 - whip
+              3 - sword               7 - polearm
+              4 - dagger
+    oval4 - hit theme of the weapon
+              0 - stab            3 - bludgeon
+              1 - pierce          4 - slash
+              2 - chop
+    oval5 - delay of hand caused by using weapon
+#
+RUNUSED OUNUSED MUNUSED
+ 
+        Usage: RUNUSED <zone #>
+ 
+        Gives a list of unused, uninitialzed rooms, objects, or mobiles
+        for the given zone.
+ 
+#
+RNAME
+ 
+	Usage: RNAME <New room name>
+ 
+	Changes the name of the room you are currently in.
+#
+RXCHANGE
+ 
+	Usage: RXCHANGE <old word> [new word | new words]
+ 
+	Can be used to correct typos, change words, insert words
+	or delete words from a room description. Find an experienced
+	builder for hints or try it out in a test room.
+#
+MCLONE
+ 
+	Usage: MCLONE <from vnum> <to vnum>
+ 
+	Clones one mob to another. This also works across
+	zones, and so is useful for making similar mobs in
+	different zones.
+#
+RPADD
+ 
+	Usage: RPADD <new prog #>
+ 
+	Adds a room program to the room.  The newly added program
+	will be designated as program 1.
+ 
+#
+RPSTAT
+ 
+	Usage: RPSTAT
+ 
+	Shows the commands, keywords and programs of all programs in
+	the room.
+ 
+#
+RPCMD
+ 
+	Usage: RPCMD <Program Number> <word(s)>
+ 
+	Adds a command word to the room program.  A Command word is
+	the first word of a two word trigger for the room.  Usually
+	the action verb of a two word phrase.  Multiple words can be
+	added using RPCMD
+ 
+	Example:
+ 
+	> rpcmd 1 press push depress
+#
+RPPROG
+ 
+	Usage: RPPROG <Program Number>
+ 
+	This is used to actually set the program for the room.  You
+	will enter the editor after typing this command, and type '@'
+	as usual to exit.  The room program is sequential; the first
+	line of the program being the first thing which will occur.
+ 
+	Basic commands available so far are:
+ 
+	atecho	trans	link	exit 	ostr	vstr   atlook   unlock	
+	give	take	load	force	delete  put    unlink   unexit
+	pain
+ 
+	There are also a series of if/else combinations:
+ 
+        if mexist    if haso    if link    if exit
+ 
+	Writing room programs can be difficult at first, but sig-
+	nificantly increase the "reality" of the game.  A good way
+	to learn how to write effective rpprogs is to use existing
+	programs.  Use the RPSTAT command to examine other rooms'
+	programs.
+#
+RPAPP
+ 
+	Usage: RPAPP <Program Number>
+ 
+	This command is identical to RAPP except that it allows you
+	to append additional lines of code to an existing room prog.   
+#
+RPKEY
+ 
+	Usage: RPKEY <Program Number> <Keyword(s)>
+ 
+	Sets the second word of a two word "trigger phrase" for a
+	room program.  This is usually a word located in the room
+	description, and is paired with a RPCMD word(s).
+ 
+	Example:
+ 
+	> rpkey 1 button stone rock
+#
+OCLONE
+ 
+	Usage: OCLONE <from vnum> <to vnum>
+ 
+	Clones one object to another. This also works across
+	zones, and so is useful for making similar objects in
+	different zones.
+#
+SHOPS
+ 
+	The following describes the procedure to build a shop:
+ 
+	1) You must first have, at the very least, a mob MINIT'd.  If
+	   you plan on having your shop within a room, i.e stationary,
+	   you should also have that room number RINIT'd with your mob
+	   You should also know what sort of items your shop will buy 
+	   and sell; food, weapons, etc...
+ 
+	2) Use the MKEEPER command to initialize the shop, syntax is 
+	   MKEEPER <mob vnum>.  If the shop is a room, the MFLAG of the
+	   keeper should include Sentinel.  Leave this flag out if you
+	   want to make a wandering merchant.  For the sake of simplicity
+	   you might want to consider making a mob with the same v-number
+	   as the room his shop is located.  For example, a shopkeeper
+	   whose shop is room 6123 would be minited as mob 6123.
+ 
+	3) Next, RINIT the store room.  A shop keeper does not keep his
+	   goods in his inventory, the items are placed in the store
+	   room.  All store rooms are located in Zone-2, and room 2000
+	   contains a list of the numbering structure for your store
+	   room based on what type of items the keeper will buy/sell.
+	   For example; a weapons shop would have a store room number
+	   in the range of 2500-2599, armor would be 2200-2299.  Hint:
+	   do a "show r 2 2500 2600" to find to find available rooms
+	   for your store room within the proper range.
+ 
+	4) Now use the "LOAD obj <obj vnum>" inside your store room to
+	   place the sell-able items in your shopkeepers listing.  A
+	   shop should not really contain more than 6-7 items, this
+	   should allow a wide enough variety without providing a player
+	   with access to too many items in one location.  Now, when you
+	   type "list" in the same room as your shop keeper, you should
+	   see all the items you just loaded into your store room.
+ 
+	5) A shop can "reproduce" an unlimited supply of up to five
+	   items.  This adds a bit of "reality" to the game.  If you
+	   were in a tavern, you should be able to purchase more than
+	   one tankard of ale.  The KPIT command allows you to specify
+	   which items you want your shop to reproduce.  Note: Some
+	   discretion should be used in
+	   specifying which items will be reproduced.  For example, it
+	   would be common for a keeper to produce an unlimited supply
+	   of ale, but not for a weapons-maker to reproduce the finest
+	   chain mail, or the best broad-sword without limit.  There-
+	   fore, do not set "quality", "complex", or "unique" items
+	   with KPIT.
+ 
+	6) To set the types of items a shop will purchase from players,
+	   use the KTYPE command.  Note: Some items should not be set
+	   with KTYPE; Trash, Food, Other, and Note.
+ 
+	7) Another thing to set when making a shop is its buy and sell
+	   profit values.  The KBPROF command sets the percent value
+	   that the keeper will try to purchase the item for.  Example:
+	   "KBPROF <shop-vnum> .75", would mean that the shop keeper
+	   would try to buy an item off the player at 75% of its real
+	   cost.  Similarly, with "KSPROF <vnum> 1.1", the keeper will
+	   try to sell the item 10% more than its cost.
+ 
+	8) You can also make your shop original by having your keeper
+	   whisper unique sayings to players.  These can be set with
+	   the KMBUY, KMSELL, KNOBUY, KKNOCAS, KKNOIT, and the KPNOIT
+	   commands.
+#
+FREEZE 
+	
+	Usage: FREEZE <zone>
+ 
+	Stops all mobile activity updates for the specified zone. Use
+	this to prevent mobiles from wandering during build/save periods.
+	Use THAW to reverse the affects of this command.
+ 
+#
+RDFLAG 
+ 
+	Usage: RDFLAG <direction> <door flag>
+ 
+	Toggles the flags for the door in the given direction.
+	Currently you can set only set the PICKPROOF flag.  If
+	you want to make a door "secret", use the RCRET command.
+ 
+#
+MINIT 
+ 
+	Usage: MINIT <vnum>
+ 
+	Creates a new mobile in the current room. You might consider
+	using the FREEZE command to keep the mobiles from wandering
+	while you edit.  You may use the MUNUSED command to get a list
+	of available vnums for the particular zone number.
+    
+ 
+#
+OINIT 
+ 
+	Usage: OINIT <vnum> <type | ?>
+ 
+	If a valid type is given, a new object of that type is created
+	and placed in your inventory. If '?' is given as the only
+	argument, then the possible types are listed.  The OUNUSED
+	command can provide a list of available vnums within the
+	specific zone.
+    
+#
+RAPPEND
+ 
+	Usage: RAPP
+ 
+	Allows the addition of text to the end of an existing room
+	description.  No arguments are used, you will enter the editor
+	to append your additions.  Use the "@" sign to terminate
+	for input.
+    
+#
+RCLONE 
+ 
+	Usage: RCLONE <source vnum> <target vnum>
+ 
+	Copies the name, description, sector type, and room flags of
+	the source room to the target room. Both rooms must already
+	exist and must be in the same zone.
+ 
+#
+RDDESC 
+ 
+	Usage: RDDESC <direction>
+ 
+	Adds a description for exit (a door door not have to be present)
+	in specified direction. You will be prompted for the description
+	after entering the command.
+    
+#
+RDOOR 
+ 
+	Usage: RDOOR <direction> [keyword(s)]
+ 
+	Creates a door in the specified direction provided an exit or
+	link exists for that direction. A keyword may be specified if
+	desired, the default is "door". direction is one of the 
+	following: n,s,e,w,u,d. 
+ 
+#
+REDESC 
+ 
+	Usage: REDESC <keyword(s)>
+ 
+	Adds a keyword and extra description for something in the
+	current room. Ater the command with the keyword is given, you
+	will be prompted for a description. This is useful for describ-
+	ing signs and anything else that need not be an object or will
+	not be taken from the room.
+    
+#
+REXIT 
+ 
+	Usage: REXIT <direction> <target room>
+    
+	Creates a one way passage in the specified direction to the
+	target room. Both rooms must exist. The exit is removed with
+	the REXITRM command.
+ 
+#
+REXITRM 
+ 
+	Usage: REXITRM <direction>
+ 
+	Removes a one way link to the room in the direction specified,
+    
+	See Also: REXIT
+    
+#
+RDESC
+ 
+	Usage: RDESC
+ 
+	Allows entry of a new description for the room you are currently
+	in.  Rdesc takes no arguments, you will enter the editor to
+	enter the description, terminate the editor with the "@" sign.
+	Keep in mind that there is no word-wrap, so be sure to enter a
+	newline when close to 80 characters.  For adding to the end of
+	an existing description, use RAPPEND.
+ 
+	Format:
+	1) Please place three blank spaces at the start of a new
+	   paragraph.
+	2) Room descriptions should avoid excessive references to
+	   "you" and "your".
+	3) Room descriptions should be at least 4 lines in length,try
+	   to be descriptive; use references to smells and sounds as
+	   well as visual perceptions when appropriate.
+ 
+#
+RFLAGS 
+ 
+	Usage: RFLAGS [flag/?]
+ 
+	Toggles the flags for the current room. If no argument is
+	given, the cureent room flags are shown. If a '?' is given
+	as the argument, all possible flags are shown.
+ 
+#
+RINIT 
+ 
+	Usage: RINIT <Vnum>
+ 
+	Creates a new room with the supplied virtual number <Vnum>.
+	The number must be an unused vnum. Use the goto, rexit or
+	rlink commands to get to the new room.  You may use the
+	RUNUSED command to get a list of available vnums of rooms for
+	a specific zone.
+ 
+#
+RKEY 
+ 
+	Usage: RKEY <direction> <key number> <pick penalty>
+ 
+	Allows the door in the direction given to be locked an unlocked
+	using a key with the specified key number. Creation and placement
+	of the key is the responsibility of the builder as automation of
+	this process would take away from the flexibility of the olc
+	system.
+    
+#
+RLINK 
+ 
+	Usage: RLINK <direction> <target room>
+ 
+	Creates a two way passage in the specified direction between
+	the room you are currently in to target room. Both rooms must
+	exist. The link is removed by using the RLINKRM command.
+    
+#
+RLINKRM 
+ 
+	Usage: RLINKRM <direction>
+ 
+	Removes a two way link between two rooms in the direction
+	specified.
+    
+	See Also: RLINK
+    
+ 
+#
+RSECTOR 
+ 
+	Usage: RSECTOR [sectortype | ?]
+ 
+	Sets the sector type for the room. If no arguments are given,
+	this command returns the current sector type. If the arguemnt
+	'?' is given then all possible sector types are listed.
+    
+#
+SHOW 
+ 
+ show m <zone> [name] 	- Show mobiles in zone, optional name to match.
+ show o <zone> [name] 	- Show objects in zone, optional name to match.
+ show a               	- Show object, mobile, player, room totals for
+                          all non-empty zones.
+ show z               	- Show all zones by name.
+ show s               	- Show grand-totals for rooms, objects and mobiles.
+ show r <zone>[low][high] 	- Show names and exit information for all rooms
+                          in zone.
+ show p			- Show a list of the "real" names of all players.
+    
+    **NOTE: information given by show o and show m is based on the master
+            for that obj/mob. 
+ 
+#
+THAW 
+ 
+	Usage: THAW <zone>
+    
+	Re-enables mobile activity updates in the specified zone.
+	Mobiles will wander and perform special functions as in
+	normal game play. This command is used in conjunction with
+	the FREEZE command.
+ 
+#
+WSAVE
+ 
+	No arguments. This saves the entire world, from zone 0-99.
+	Use of this command is restricted to trust level 5 users and
+	should not be used by the normal builder. Use ZSAVE to save
+	your zone. This will use as much CPU time as it can as it is
+	meant as an emergency save tool for use in time constrained
+	situation. Be prepared to endure very heavy lag until the
+	entire world is saved.
+    
+#
+ZLIFE 
+ 
+	Usage: ZLIFE <minutes>
+    
+	Sets the time between resets in minutes.
+ 
+#
+ZMODE 
+ 
+	Usage: ZMODE <mode>
+    
+	Sets the reset mode for zone you are currently in.
+	Mode is one of the following:
+    
+                                 0 - Never reset
+                                 1 - Reset if no players in zone
+                                 2 - Reset always
+ 
+#
+ZNAME 
+ 
+	Usage: ZNAME <name>
+ 
+	Sets the name for zone you are currently in.
+    
+#
+ZREBOOT 
+ 
+	*** NOT YET IMPLEMENTED ***   
+ 
+	Usage: ZREBOOT <zone> 
+ 
+	Full purge and reset of all rooms as determined by the last
+	saved configuration.
+ 
+#
+ZRELOAD 
+ 
+	Usage: ZRELOAD <zone>  
+ 
+	Purges all objects and mobiles from zone specified and reloads
+	them in the same manner as the last reboot.
+ 
+#
+ZRESET 
+ 
+	*** NOT YET IMPLEMENTED ***
+ 
+	Usage: ZRESET <zone>  
+ 
+	Resets the specified zone, no purging is done.
+ 
+#
+ZSAVE 
+ 
+	Usage: ZSAVE <zone>
+ 
+	Saves the rooms, mobiles and objects in the specified zone. Only
+	mobiles and objects that belong to that zone will be saved (SEE
+	ZONE LAYOUT for info on what belongs to what). Currently only
+	one level of recursion is saved for containers, therefore a bag
+	inside a box inside a chest will not save properly, but a steak
+	inside a bag carried by a dwarf saves a expected.
+ 
+#~
+

@@ -1,0 +1,387 @@
+Object Building Manual Additional Information version 1.0
+30 June, 2006
+
+Written by:
+Auroness
+auroness@gmail.com
+
+Object Values (oval#) and misc notes, by Item type.
+
+ITEM_ARMOR
+	oval0:  Armor Value.  This is how much damage is obsorbed before
+			taking into account hit location.  For instance, when you are
+			hit in the neck with 5 points of damage, and you have armor
+			worth 3, then pre-hit location damage is 5-3=2.  (Multiplier
+			for being hit on the neck is 3...so your approximate damage
+			would be 2 x 3 = 6 (vs 5 x 3 = 15, which is what it would be
+			without armor).  There are other factors in damage too, which
+			aren't described here.
+	oval1:  Armor Type:
+		0 - quilted
+		1 - leather
+		2 - ring
+		3 - scale
+		4 - mail
+		5 - plate
+	
+	Wear bits of HEAD or FACE armor can be set to Extra-bit of Mask to
+	make helms, or other cloaking items. Use <oset mkeys> to add keywords
+	for the mask. Note that ABOUT armor cannot be set to MASK. Use ITEM_WORN to
+	make a masked item, a hooded cloak for example.
+
+ITEM_BOARD
+	No ovals used for this object.  To make a new board, first create the
+	board object, then create a board entry using "board create" to link
+	to the board object.  Code will create a "page" for writing messages.
+   
+ITEM_BOOK
+	oval0:	number of pages remaining in the book
+	oval1:	Used to hold the messages written. Not set by oset
+
+ITEM_BRIDLE
+	No ovals used. Item must be set to be worn on the neck. <oset wear neck>
+	
+ITEM_BULLET
+	oval0:	number of dice for damage
+	oval1:	size of dice for damage
+	
+ITEM_CLOTH
+	Not implemented yet.
+	
+ITEM_COMPONENT
+	No ovals are used.  This item type can be used as an alchemy 
+	ingredient. Should be set as COMBINABLE to be used with other ingredients.
+
+ITEM_CONTAINER
+	oval0:  Maximum capacity in weight.
+	oval1:  Set with bit flags. Add up the bit values you want, then set the
+			value
+	
+			Closeable	1
+			Pickproof	2
+			Closed		4
+			Locked		8
+			Trap		16
+			Beheaded	32	(only used for corpse containers)
+				An normal open bag: oval1 = 1
+				A closed bag: oval1 = 1 + 4 = 5
+				A closed and locked chest: oval1 = 1 + 4 + 8 = 13
+				A closed, locked, and trapped chest: oval1 = 1 + 4 + 8 + 16 = 29
+				A standard corpse without a head: oval1 = 32
+		
+	oval2:  key vnum
+	oval3:  pick penalty
+	oval4:  not used
+	oval5:	corpse (don't set this please) or seating capacity
+		0: unlimited seating
+		n: maximum seating
+
+	Note: Beds are just TABLES with altered descriptions.
+
+ITEM_DRINKCON
+	oval0:	Capacity of the container
+	oval1:	Volume in container when created
+	oval2:	Liquid type
+	oval3:	spell_1;
+	oval4:	spell_2;
+	oval5:	spell_3;
+	
+ITEM_DWELLING
+	Will need an indoor-description.
+	oval0: destination room number - set by code, not user 
+	oval1: max occupancy
+	oval2: Set with bit flags. Add up the bit values you want, then set the
+			value. Note: At this time dwellings are temporary, they cannot be
+			locked nor can they be picked. The only options are Closeable and
+			Closed.
+	
+			Closeable	1
+			Pickproof	2 ** not implemented yet
+			Closed		4
+			Locked		8 ** not implemented yet
+			Trap		16 ** not implemented yet
+						
+	oval3:	key vnum	** not implemented yet
+	oval4:	Pick penalty ** not implemented yet
+	
+ITEM_DYE
+	Not implemented yet.
+	
+ITEM_FLUID
+	Used with Drink containers and fountains.
+	oval0:	Alcohol value
+	oval1:	Water value
+	oval2:	Food value
+	
+ITEM_FOOD
+	oval0:  Hours the food will satisfy the consumer.
+	oval1..oval4: Magic spells.  Use oset slot to set these.
+	oval5:	Bites, similar to capacity of drinks
+   
+ITEM_FOUNTAIN
+	oval0:	Capacity of the container
+	oval1:  Fountain has something in it if > zero.
+	oval2:  Liquid Type:  (see oval2 of liquid_container)
+	oval3:	Spell_1 - Use oset slot to assign.
+	oval4:	Spell_2 - Use oset slot to assign.
+	oval5:	Spell_3 - Use oset slot to assign.
+   
+ITEM_FUR
+	Not implemented yet.
+	
+ITEM_GRAIN
+	Not implemented yet.
+	
+ITEM_HEAD
+	No ovals are used.
+
+ITEM_HEALER_KIT
+	Note: to set this item type use remedy. <onint n remedy>
+	oval0:	Uses remaining in kit
+	oval1:	Healing bonus when kit is used
+	oval2:	level of Healing skill to use this item
+	oval3:	Immediate Regen
+	oval4:	Not used
+	oval5: 
+	<oset treat type>
+	Types that can be treated: all, blunt, slash, puncture, burn, frost 
+	
+ITEM_HERB
+ITEM_INGOT
+ITEM_INK
+	oval1: total capacity of container
+	oval2: number of uses left
+	????:  ink color
+	
+ITEM_INST_PERCU
+ITEM_INST_STRING
+ITEM_INST_WIND
+ITEM_KEY
+	Ovals not used.
+	
+ITEM_KEYRING
+ITEM_LIGHT
+	oval0:  Color (not implemented)
+	oval1:  Type  (not implemented)
+	oval2:  Mud hours of life in light.
+
+ITEM_LIQUID_FUEL
+ITEM_LOCKPICK
+ITEM_MISSILE
+	oval1:  # dice in damage 2 in 2d4
+	oval2:  # sides in dice  4 in 2d4
+
+ITEM_MONEY
+	Just a Normal object like coins. Generally some sort of coin. 
+	(Should be set to CAPITAL automatically)
+	
+ITEM_NOTE
+ITEM_NPC_OBJECT
+ITEM_ORE
+ITEM_OTHER
+ITEM_PARCHMENT
+	No ovals are used.
+	
+ITEM_PERFUME
+	oval0:	Type
+	oval1:	Duration
+	oval2:	Aroma Strength
+	oval3:	Doses
+	
+ITEM_PLANT
+	oval0:  Set to herb it will produce.
+	
+	
+ITEM_POTION
+	oval0 - oval5 contain spells.  Use oset slot to assign them.
+	
+ITEM_POTTERY
+ITEM_QUIVER
+
+ITEM_REPAIR_KIT
+	<oset mends type>
+	Types that can be mended: All, none, weapon, shield, armor, worn, container,
+	quiver, sheathe, dwelling, tent or items created with metalcraft, woodcraft,
+	textilecraft, hideworking, stonecraft, dyecraft, glasswork, gemcraft, or
+	pottery.
+	
+	For example:
+	oset mends armor
+	oset mends gemcraft
+	
+ITEM_SALT
+ITEM_SALVE
+ITEM_SCROLL
+ITEM_SHEATH
+
+ITEM_SHIELD
+	(<oset affects Block> - to set value for Block skill)
+	
+ITEM_SPICE
+ITEM_STAFF
+
+ITEM_TENT
+	Will need an indoor-description
+	
+ITEM_TICKET
+	oval0:	Ticket_number
+	oval1:	Shopkeeper's vnum
+	oval2	Date Stabled (Set by code, not by oset command)
+	
+ITEM_TIMBER
+ITEM_TOOL
+ITEM_TRAP
+ITEM_TRASH
+ITEM_TREASURE
+ITEM_USURY_NOTE
+ITEM_WAND
+
+ITEM_WEAPON
+	oval0:
+		0 - primary hand
+		1 - secondary hand
+		2 - either hand
+		3 - two-handed
+	oval1:	# dice in damage  2 in 2d4
+	oval2:	# sides on dice   4 in 2d4
+	oval3:	obsoleted. Use 'oset type <skill-name>' to determine type
+	oval4:	What sort of hit the weapon makes (has slightly different
+			affects on different armors):
+		0 - stab
+		1 - pierce
+		2 - chop
+		3 - bludgeon
+		4 - slash
+	oval5:	Adjustment to base on hand for this weapon.  
+			NOTE:  Base delays are based on oval3.  For instance, a
+			sword (3) might have a delay of 4 seconds, and a dagger (4)
+			has a base delay of 3 seconds.  The oval5 is an adjustment
+			to this base delay, either positive or negative in quarter
+			seconds.  So, if you have a really fast dagger, you might
+			put -2 in oval5, meaning 1/2 second faster than normal.
+
+		Additionally, the following can also be set 
+		(possibly by code or maybe by oset)
+		
+		use_skill;
+		hit_type;
+		delay;
+		basedamage;
+		attackclass;
+		defenseclass;
+		range;
+
+ITEM_WOODCRAFT
+ITEM_WORN
+	oval0..oval4 aren't used.  Oval5 contains a C pointer.  Please don't
+   modify it.
+   
+ITEM_WRITING_INST
+ITEM_ZONE
+
+   
+-----------------------------------------
+Additional Notes:
+
+
+
+liquid-container? values
+	oval0:  Maximum quantity container can contain.  Each 1 is a "drink".
+	oval1:  Current quantity in container.  Build this at maximum usually,
+           and as players drink from it, the quantity goes down for each
+           instance of the item.
+   	oval2:  Liquid Type:
+             see 'show o fluid' for a list; use the VNUM of the object
+   	oval3:  not used
+   	oval4:  not used
+   	oval5:  not used
+   
+   ==========++++++++++++++==========
+               WEAR BITS
+About
+Arms
+Back
+Belt
+Blindfold
+Body
+Ears
+Eyes
+Face
+Feet
+Finger
+Hair
+Hands
+Head
+Legs
+Neck
+Sheath
+Shoulder
+Take
+Throat
+Waist
+Wield
+Wrist
+
+   ==========++++++++++++++==========
+               APPLY TYPES
+Age 
+Armor 
+Aura 
+Cash 
+Charisma 
+Constitution 
+Damagebonus 
+Defense 
+Dexterity 
+Height 
+Hitpoints 
+Intelligence 
+Movement 
+None 
+Offense 
+Save_Bre 
+Save_Par 
+Save_Pet 
+Save_Rod 
+Save_Spe                
+Sex 
+Strength 
+Weight 
+Will 
+
+
+   ==========++++++++++++++==========
+               EXTRA BITS
+
+Bless 
+Capital 
+Combinable 
+Drop-affect 
+Get-affect 
+Glow 
+Hit-affect 
+Hum 
+Illegal 
+Invisible 
+item-leader 
+item-member 
+item-omni 
+Loads 
+Magic 
+Mask 
+Mount 
+Multi-affect 
+NewSkills 
+Nodrop 
+Ok 
+PC-Sold 
+Pitched 
+Restricted 
+Stack 
+Table 
+Thrown 
+Timer 
+Variable 	
+VNPC 
+Wear-affect 
+Wield-affect 

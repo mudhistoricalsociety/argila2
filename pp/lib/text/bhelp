@@ -1,0 +1,20 @@
+#6===========================#0 #4Room Commands#0 #6=============================#0
+RAPPEND	RCLONE 	RDDESC 	RDOOR 	REDESC 	REXIT	REXITRM	RDESC	RFLAGS 	
+RINIT 	RKEY	RLINK	RLINKRM	RSECTOR	RDFLAG	RNAME	RUNUSED
+
+RPADD	RPDEL	RPAPP	RPCMD	RPKEY	RPPRG	RPSTAT	RXCHANG RCRET
+
+#6==========================#0 #4Mobile Commands#0 #6============================#0
+MINIT				MOBILE				MSET
+
+#6==========================#0 #4Object Commands#0 #6============================#0
+OINIT				OBJECT				OSET
+
+#6===========================#0 #4Zone Commands#0 #6=============================#0
+WSAVE 		ZLIFE  		ZMODE 		ZNAME  		ZREBOOT	
+ZRELOAD		ZRESET		ZSAVE 		THAW		FREEZE 
+
+#6======================#0 #4Misc. Commands and Info#0 #6========================#0
+SHOPS		SHOW		WEAPON		REPLACE		INFO
+SET		
+

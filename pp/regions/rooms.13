@@ -1,0 +1,83 @@
+#13501
+A Sample Shop~
+This is a shop during the day
+~
+13 65536 0
+0
+A
+~
+~
+This is the rain description
+~
+~
+~
+~
+This is the night ddescription
+~
+~
+This is the not raining description
+~
+~
+~
+~
+~
+~
+~
+Can't walk through walls, can you?
+~
+~
+~
+D1
+~
+~
+0 -1  0 13009
+S
+#13502
+Storeroom for 13501~
+   This is the store room for the sample shop in room 13501. 
+This is where his goods are stored for sale, and where the money 
+is deposited after a sale. 
+~
+13 1342242816 0
+0
+S
+#13000
+New Room~
+This is a cooll description for normal use.
+~
+13 1610678272 0
+0
+A
+~
+~
+This is the raining description.
+~
+~
+~
+~
+This is the night description
+~
+~
+~
+~
+~
+~
+~
+~
+~
+This is the alas west descrtiption
+~
+~
+~
+R
+1
+testor.lua:room_timer~
+S
+#13001
+Test Chamber~
+Test Chamber
+~
+13 1073807360 0
+0
+S
+$~

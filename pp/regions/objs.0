@@ -1,0 +1,47 @@
+#44
+ticket small number paper~
+a small ostler's ticket~
+A small paper ticket with a number is here.~
+~
+43 0 1048576
+0 0 0 0
+1 0.000000
+0 0 0 0 0 0 1
+0.000000 0 0 0 0 0 0
+#45
+head~
+a head~
+A head is here.~
+~
+44 0 9437184
+0 0 0 0
+10 0.000000
+0 0 0 0 0 0 1
+0.000000 0 0 0 0 0 0
+#46
+corpse~
+a corpse~
+A corpse is here.~
+~
+15 4096 1048576
+0 0 0 0
+1000 0.000000
+0 0 0 0 0 0 1
+0.000000 0 0 0 0 0 0
+R
+1
+testor.lua:room_timer~
+R
+1
+testor.lua:obj_timer~
+#195
+statue~
+a remarkably lifelike statue~
+A remarkably lifelike statue looms here.~
+~
+15 0 0
+0 0 0 0
+1000 0.000000
+0 0 0 0 0 0 1
+0.000000 0 0 0 0 0 0
+$~

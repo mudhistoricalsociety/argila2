@@ -1,0 +1,141 @@
+# ADD NEW HINTS AT TOP OF FILE. LEAVE THIS LINE IN!
+Your character may move to block an exit by using the
+GUARD <direction> command.
+~
+Be sure to check out our web forum, located at:
+
+http://www.YourMud.com/forums/
+
+Your login there will match your MUD account name password.
+~
+Don't forget to check out HELP NEWBIE!
+~
+To use YourMud's OOC journalling system, take
+a look at HELP JOURNAL for a listing of the proper syntax.
+~
+If you need to roleplay with an NPC, feel free to petition
+up to request a staff member to animate them!
+~
+To turn these off, type SET HINTS. You may re-enable them 
+at any time by typing SET HINTS again.
+~
+MudMail is our built in mudmailer system. To access 
+it, quit out and choose from the menu.
+~
+If your character is a non-combative sort, don't forget to 
+SET the PACIFIST and AUTOFLEE flags!
+~
+Another commonly used command is SCAN, which allows you to 
+survey nearby rooms. You may either use it without an 
+argument, or with a direction specified.
+~
+YourMud is a role-play intensive MUD, and not 
+what's called 'hack-and-slash'. Thus, roleplay is required 
+above all else: our primary focus is to enjoy developing 
+our characters in a way that isn't limited to skills.
+~
+The SCRIBE command is used to choose which script you 
+would like your character to write in.
+~
+Use the SPEAK command to choose which language you would 
+like your character to speak in.
+~
+Coded character progress is represented here in skills, 
+not experience points. So, you will only improve at a 
+specific thing if you practice it. Be aware, however, 
+that there are a number of measures in place to thwart 
+scripters and powergamers.
+~
+There is a small difference between the TALK and SAY 
+commands. When you SAY something, everyone in the room 
+will hear it. However, if you are sitting at a table 
+and you use TALK, only those at your table will be able 
+to hear it without making a listen check.
+~
+In YourMud, there are four primary means
+of communication: say, tell, shout and whisper. All
+but shout require that the person you wish to hear
+what you've said be in the same room; shouting has a
+radius of one room in all directions.
+~
+To open a door when there are multiple doors in the room,
+you type 'open <door name> <direction>', e.g. 'open gate
+west'; closing them works in the same fashion.
+~
+The SKILLS command displays your current skill ratings.
+~
+Type HEALTH for a detailed display of any wounds you have.
+~
+The FOLLOW command allows you to passively follow someone.
+~
+As YourMud is a role-play intensive MUD, there
+are no channels here - except in very special circumstances,
+such as telepathy, you are only able to communicate with
+those other characters whom are in the room with yours.
+~
+If you have any questions or concerns and need to reach a
+member of staff, the syntax is: 'petition all <message>'.
+However, please do not use this command superfluously!
+~
+Our staff email address is staff@yourmud.com.
+~
+CRAFTS represent your character's ability to do certain
+things, from sewing tunics to building campfires. We have
+crafts for all manner of different skills; if you feel
+that your character should have some, petition up about it.
+~
+To get a list of your character's known crafts, use the
+CRAFTS command. To see a list of required materials, skill
+checks, and phase times for a given craft, use the MATERIALS
+command, e.g. 'materials breadloaf'.
+~
+HIT and KILL are two different commands here. When you HIT
+someone, you will automatically stop should they collapse,
+and you will also accept their surrender. If you KILL
+someone, you will fight them until they are dead. You may
+change between the two modes in the middle of combat.
+~
+Law enforcers in YourMud, unlike today's police, are
+authorized and even predisposed to use lethal force. When
+they discover a criminal, they will attack him until he has
+been rendered unconscious, and then drag him off to jail;
+however, sometimes accidents happen, and he is killed. If
+you are wanted for only a minor crime, it is highly advised
+that you SURRENDER to the nearest guard.
+~
+Liberal use of the THINK command will help the admins get a
+feel for your character's reactions, and is encouraged as a
+cornerstone of excellent roleplay.
+~
+YourMud is a role-play intensive MUD. Thus, OOC
+chatter is prohibited in the game itself, save in small
+doses to assist new players. If you'd like to hang out with
+your fellow players and staff OOC, log in as a guest.
+~
+If you're a new player and you have questions you'd
+like to ask other players, use the OOC command - it's like 
+a SAY, but it's out-of-character; use it sparingly.
+~
+Unlike most MUDs, there is a delay here when you move your
+character around in the game world. The delay is either
+shorter or longer depending on your pace; look for 'walk
+speeds' under 'Movement' when you type SET ? to see a
+list of the various speeds you can move at.
+~
+The SET command is extremely versatile, and important. For
+a list of configurable options, type SET ?.
+~
+Unlike many other MUDs, in YourMud it is possible,
+and often even encouraged, to have your PC make his or her
+living as something else besides a typical warrior; a cheery
+barmaid, a wise old scholar, or a dour armorsmith are only
+a few of the possibilities. The goal, above all else, is RP!
+~
+A few commonly used terms:
+
+    RP: Roleplay
+    IC: In-Character
+    OOC: Out-of-Character
+    Pof: Player Of
+~
+~

@@ -1,0 +1,81 @@
+/*
+ *  Shadows of Isildur RPI Engine, Production
+ *  Publicly Released December 2004
+ *  Copyright C. W. McHenry [Traithe], 2004
+ *
+ *  Getting Started Walkthrough, Part II
+ */
+
+DATABSE SETUP:
+
+The included .sql files are all the necessary files needed to create
+and populate the MUD's various database structures. These were created
+using mySQL 4.1, and were dumped in 3.23 compatibility mode, so they
+SHOULD be compatible with mysql version 3.23 and any newer installs.
+They will certainly not work with a different TYPE of database server.
+
+First, you will need to create the database structures. To run the game,
+you must first have three allotted databases on your server; a primary
+database, a second database for the playerfiles, and a third log database.
+
+The server assumes that these are named "shadows", "shadows_pfiles", and
+"server_logs", respectively. To change these defaults, you will need to
+edit the variables near the top of ../src/structs.h, and you will need
+to edit the .sql file(s) for the corresponding database(s).
+
+On most host servers, since you do not have root access, you'll need to ask
+your hosting provider to set up your mysql access to these specifications.
+
+Assuming you're okay with the names, and that the databases have been created
+for you to access, here are the first three steps. While in this directory:
+
+1. mysql shadows < primary_database.sql
+2. mysql shadows_pfiles < pfiles_database.sql
+3. mysql server_logs < log_database.sql
+
+Next, you'll need to populate certain databases with data; specifically,
+we've provided you a copy of all our helpfiles so you'll be able to
+use them as command guides, and we've also got a pre-made implementor
+character and implementor account so you can log into the server.
+
+To populate the tables, in this directory you'll want to type:
+
+4. mysql shadows < helpfiles.sql
+5. mysql shadows < admin_account.sql
+6. mysql shadows_pfiles < admin_pfile.sql
+
+Congratulations! Your database is setup and populated to run the server.
+
+As a side note, a neat feature you might be interested in is integration
+of a phpBB (http://www.phpbb.com) system with the MUD. The MUD was written
+to mesh with a bulletin board installation; when you install the BB, simply
+specify "forum" as the table prefix. This will allow both the MUD server AND
+the bulletin board to draw from the same database for account information -
+one login for both the forum and the MUD, etc, etc. As of the time of this
+writing, our server runs a 2.0.11 phpBB version; compatibility with an earlier
+or a later version of the software is not guaranteed.
+
+
+FINISHING UP:
+
+Next, you will need to edit your ../src/structs.h file to suit your
+mysql authentication information, to make sure it can connect on startup.
+
+To fire up the server, change into the pp/ directory, and then type
+"./start-server >& /dev/null &" at the prompt. This will start the MUD
+up on port 4500, which is the "player port" by default.
+
+To create an additional port, for example, a dedicated builder port,
+simply copy the PP directory into a new location beneath the top level.
+
+If you have successfully compiled and run your server by this point, you
+will be able to log in using the account name "God", and the password
+"adminacct". The level 5 implementor PC is attached to this account,
+which you may then use to create other new immortals.
+
+Have fun, and best of luck with your new MUD! Do let us know how things
+are progressing, should you decide to try and start one.
+
+
+12.02.2004
+traithe@middle-earth.us

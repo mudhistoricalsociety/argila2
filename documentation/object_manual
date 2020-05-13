@@ -1,0 +1,277 @@
+Object Building Manual version 1.0
+30 June, 2006
+
+Written by:
+Auroness
+auroness@gmail.com
+	
+
+The first section deals with overview commands, listed alphabetically, that allow manipulation of the objects in the game world. Then commands dealing with the creation of objects themselves follows. The third section is a collection of attributes, FLAGS, and TYPES to be used with the building process. I have included some notes and explanations to explain some of the features. Finally, there are a few sample objects, and some notes on some common problems. I end with credits to those who inspired me to write this. 
+
+Note: Items in "[ ]" are optional to a command. "< >" is used for required elements. All vnum are object vnums unless specified.
+
++++++++++++++++++++++ To Work With Objects +++++++++++++++++++++++++
+find
+	Usage: find [+/- keyword] [zone] [vnum]
+	This command finds specific objects, with available zone
+	parameter and ability to specify keywords. Find with no pararmeters give a
+	little help file.
+	
+	Example:
+	find 	+keyword     'keyword' must exist on obj
+     		-keyword     'keyword' must not exist on obj.
+     		zone         Only consider objects in this zone.
+     		vnum         Just find the specific object vnum.
+	> find 1001 (Note: vnum under 100 will revert to zone numbers instead)
+	> find +rusty +dagger
+	> find +rusty -sword 12 (finds rusty things in zone 12 that aren't swords)
+  
+load
+	Usage: load obj [quantity] vnum [color]
+	Using this command, a staff member may load the specified object. If the
+	object being loaded is a variable object, marked with a $color, $drabcolor
+	or $finecolor tag, the desired color may be specified in the command.
+	
+	Example:
+	load obj 3			will load a single object with vnum=3
+	load obj 5 3		will load 5 copies of vnum = 3.
+	load obj 5 3 red	will load 5 copies of a red object, vnum = 3
+
+olist
+	Usage: olist [?] [+/- <keywords>] [zone] [item-type]
+	This command shows a list of existing objects with the specified keyword(s).
+	The vnum, keywords, and sdesc are displayed with additional information for
+	some item-types.
+	
+	With no parameters, it will print a short help file.	
+	With the ? symbol will list all objects in the gameworld, similar to the 
+	<show o> command.
+	
+	Using +/- Keyword will display objects with/without that keyword.
+		
+	If a number is used with olist, objects from that zone will be displayed.
+	
+	If an ITEM-TYPE is used, then only objects of that type will be displayed. 
+	(See ITEM-TYPES in the FLAGS section of this manual).
+	 
+	Examples:
+	olist +sword -rusty		will list all non-rusty swords
+	
+	olist +al 				will list all objects that have a keyword that
+							starts with "al", (altar, ale, amulet...)
+							
+	olist 3					will display all objects in Zone 3
+	
+	olist +sword -rusty weapon 10	will display non-rusty swords of type weapon
+									from zone 10.
+
+
+ounused
+	Usage: ounused [zone number]
+	This command provides a list of available vnums within the 
+	desired zone. Defaults to the current zone if none is specified.
+	
+purge
+	Usage: purge [object name]
+	This command destroys the specified object, or, if used 
+	alone, destroys all objects in the room.   
+	
+show
+	Usage: show <option> [zone][name]
+	This command will show various bits of summary information, depending on the
+	option chosen.  The options dealing with objects are "a", "o", and "s".
+	 
+	Examples:
+	show a       	- Show object/mobile/player/room totals by zone.
+	show o 4		- Show objects in zone 4.
+	show o dagger	- Shows all objects with dagger in thier name.
+	show o 3 altar	- Shows all altars in zone 3
+	show s			- Show grand totals for building and pfiles.
+
+stat
+	Usage: stat <option> <object name | vnum>
+	This command displays information about the indicated object. There are
+	several options available, but for objects, the only one you need is "o". If
+	you use the vnum, you will get the stats for the prototype for that object.
+	If you specify an object name, the object must be in your hands, or in the
+	room. In that case, the information provided is about that specific instance
+	of the object.
+	 
+	Examples:
+	stat o 2004			Will display information about "VNUM:  43 [Prototype]
+						[Container] [id 0]" 
+
+	stat o jailbag		Will display information about "VNUM:  43 [Instance]
+						[Container] [id 26039]" (Color, contents of bags, and
+						 morpphing time ... )
+
+swap	
+	Usage: swap <worldfile | binary> [zone number]
+	This command is what allows the staff to update the server between the 
+	three ports. Swapping the worldfile updates the objects, mobs and rooms.
+	Swapping the binary updates the actual code, so use it with extreme caution.
+	
+	Examples:
+	swap worldfile [zone]		From the PLAYER port, this will update the
+								PLAYER port	with all of the building done on the
+								BUILDER port. This command will not work from
+								the BUILDER port, unless the zone is specified.
+								In that case, the changes made on the TEST port
+								in the specified zone will transfer to the
+								BUILDER port.
+
+	swap binary		This command can only be done by the implementor.
+					This will copy the server from the TEST port to the port
+					that you issued the command in. Use with extreme caution. If
+					you don't understand how it works, don't use it.
+
+wearloc
+	Usage: wearloc <wear location> [zone]
+	Using the wearloc command, staff members may search the object database 
+	for items that can be worn at the specified location. If the zone is
+	specified, it will only search that given zone; otherwise, it will search
+	the entire database for objects. (See WEAR-BITS in the FLAGS section of this
+	manual).
+	
+	Example:
+	wearloc face 3		Will show all objects that can be woon on the face, in
+						zone 3
+	
+where
+	Usage: where [object name] [N/PC name]
+	When used with an [object name], it will displays where the specified object
+	is. If the object is inside a container, the container is listed. You need
+	to use WHERE to find the container. If a N/PC name is given, then the
+	location of that N/PC is given. If no argument is given, the command will
+	displays a list of all currently connected players. 
+	
+	Examples:
+	where
+			God		- Arena North-West [5199]
+			Alima	- Street in front of villa [2020]
+
+	where Alima
+			Alima	- Street in front of villa [2020]
+		
+	where dirk
+			a long dirk with a w- Inside a black leather sheath with a horse
+			design in silver, vnum[02021].
+
+	where horse
+			a black leather shea- Carried by sepia-marked, ebony haired woman
+			in room[2020].
+			
+	
+zsave
+	Usage: zsave <zone number | all>
+	This command commits the current state of the world to the mySQL 
+	database.  As such, it should ONLY BE USED ON THE BUILDER PORT. Any 
+	changes committed will appear on all ports, after they are rebooted and 
+	the changes loaded into place with the swap command. You can save just the
+	changes in the zone, or all of the changes. 
+	
+	Be sure to zsave your work before you do a manual reboot, or the changes
+	will be lost! It is also a good idea to save your work periodically, in case
+	a crash destroys all of your building efforts
+	
+	Examples:
+	zsave 2			Saves all changes made to zone 2
+	
+	zsave all		Saves all changes made in all zones
+
++++++++++++++++++++++ To Create an Objects +++++++++++++++++++++++++
+
+oinit
+	Usage: oinit <vnum> <type | ?>
+	If a valid type is given, a new object of that type is created and placed 
+	in your inventory. If '?' is given as the only argument, then the 
+	possible types are listed. See below for valid TYPES
+
+object
+	Usage: object (<vnum/name>)
+	This is the base object editing command. Used with an object name or vnum 
+	it allows the builder to begin editing that particular prototype. When 
+	using a name to edit, the object must be in the builder's inventory, or 
+	in the room.
+
+oset	
+	Usage: oset <field> (value)
+	Oset is the object editing command which actually changes the 
+	specified prototype's attributes. To see a list of all possible 
+	fields, enter "oset ?".
+	
+
+That is it! Just three commands to create all of the objects in your world. The hard part is just begining however. When you type "oset ?" you get a listing of the various attributes for an object. These attributes can change slightly, depending on the item TYPE.
+
++++++++++++++++++++++ Object Attributes +++++++++++++++++++++++++
+
+name "keyword"		
+		These are the keywords for the object. They must be enclosed in 
+		quotes if you have more than one keyword
+
+sdesc "a new object"
+		This is the short description. Again, it must be in quotes if there 
+		is more than one word
+		
+ldesc "A shiny new object lays here."
+		This is the long description. Again, must be in quotes if there 
+		is more than one word.
+		
+desc 
+		You are dropped into the editor to enter an extended description. 
+		Type @ on a seperate line to end the description.
+
+indoor-desc
+		You are dropped into the editor to enter an extended description for 
+		the interior of tents or dwellings. Type @ on a seperate line to end 
+		the description.
+
+delete
+		This object is cleared from the world.  However, the prototype cannot 
+		be removed until the zone is saved, and the mud is rebooted.
+
+weight #.##
+		Sets the weight for the object.
+		
+cost #.#
+		Set price for the object based on a copper
+		
+size #
+		Sets the size for certain object types. 
+			0	---		Sizeless
+			1	XXS		XX-Small
+			2	 XS		 X-Small
+			3	  S		   Small
+			4	  M		  Medium
+			5	  L		   Large
+			6	 XL		 X-Large
+			7	XXL		XX-Large
+			
+quality #
+		***The code says this is "odds of breaking" but it may actually be 
+		a numerical value for the quality, ie. higher number better quality.
+		
+oval # # # #
+		Sets all ovalues at once
+		
+oval0 #
+...
+oval5 #
+		Sets the individual ovals
+		
+dam            #d#                  Natural damage attack
+clock          month day hour           How long until it morphs
+morphto        objnum               What it morphs to
+
+		
+'item-types'                        See:  tags item-types
+'wear-bits'                         See:  tags wear-bits
+'apply-types'  <#>                  See:  tags affect
+'extra-bits'                        See:  tags extra-bits
+
+slot <0..5>    <magic spell>        See:  show v magic
+activation     <spell-affect>       See:  show v magic
+(use in conjunction with get-affect, etc - see extra-bits)
+
+[econ] <econ-flags>                 See:  tags econ-flags
+

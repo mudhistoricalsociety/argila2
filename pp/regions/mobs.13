@@ -1,0 +1,71 @@
+#13000
+shop keeper handsome~
+a handsome shopkeeper~
+A handsome shopkeper stands here.~
+A truly handsome man stands here, wating to sell you soemthing more than you cna afford, or pay way too liitle for anything you try to pawn off on him.
+~
+10 0 4 0 0 5d1+98 1d2+0 0 8 8 1 0 0 0 0
+0 0 0 0 0 0 24 0 0 0 0 0 75 3 0 0
+16 16 16 16 16 16 81 16
+1 1
+13501 13502 1.150000 0.850000 0.000000 0.000000 0
+0.000000 0.000000 0 0.000000 0.000000 0 0
+-1
+11 0 0 0 0 0 0 0 0 0
+0 8 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+8 8 0 0 0 0 0 0 0 0
+0 0 0 0 85 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 8 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 100 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+'member' shopkeepers~
+R
+1
+testor.lua:room_timer~
+R
+1
+testor.lua:room_timer~
+#13001
+test pilot~
+test pilot~
+A test pilot awaits destruction~
+(null)~
+8 0 3 0 0 5d1+86 1d2+0 0 8 8 0 0 0 0 0
+0 0 0 0 0 0 24 0 0 0 0 0 0 0 0 0
+12 12 12 12 12 12 80 12
+0 0
+0 6 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+6 6 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 6 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+100 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+~
+R
+1
+testor.lua:mob_timer~
+R
+1
+testor.lua:obj_timer~
+R
+1
+testor.lua:room_timer~
+$~

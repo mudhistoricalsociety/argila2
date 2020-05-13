@@ -1,0 +1,43 @@
+#13002
+copper coin~
+a small copper coin~
+A small copper coin glints in the light.~
+A basic copper coin. It has some sort of figure embossed into the surface, but all details have been lost over time.
+~
+20 8388608 1
+0 0 0 0
+100 0.000000
+0 0 0 0 0 0 1
+0.000000 0 0 0 0 0 0
+#13003
+gold coin~
+a gold coin~
+A gold coin glimmers in the light.~
+This is a sparkling gold coin.
+~
+20 8388608 1
+0 0 0 0
+100 0.000000
+0 0 0 0 0 0 1
+100.000000 0 0 0 0 0 0
+#13004
+grain handful~
+a handful of grain~
+A handful of grain makes a small pile here.~
+~
+24 8388608 1
+0 0 0 0
+100 0.000000
+0 0 0 0 0 0 1
+5.000000 0 0 0 0 0 0
+#13005
+catnip bundle~
+a bundle of catnip~
+A bundle of catnip lends fragrance to the air.~
+~
+31 8388608 1
+0 0 0 0
+100 0.000000
+0 0 0 0 0 0 1
+1.000000 0 0 0 0 0 0
+$~

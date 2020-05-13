@@ -1,0 +1,18 @@
+Select the physical aspects of your character's body.  This is broken
+down into two basic catagories; frame and height, and will be used for
+sizing the various equipment found in the game.  Size will also be used
+for determining modifiers to your character, such as weight.
+
+Please note that both aspects are relative to your character's race; to
+many a Hobbit's chagrin, they just don't measure up to the Haradrim!
+
+Please type the height and frame on one line, using the list below.
+
+   Heights       - Short, Average, Tall
+   Frames        - Scant, Light, Medium, Heavy, Massive
+
+   Examples:
+              
+       >short heavy
+       >tall scant
+

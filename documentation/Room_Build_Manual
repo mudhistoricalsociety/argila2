@@ -1,0 +1,272 @@
+Room Building Manual version 1.0
+30 June, 2006
+
+Written by:
+Auroness
+auroness@gmail.com
+
+	
+Commands related to rooms in the game, creating a room, room wide items, exits and doors, secret and hiddden information. At the end will be a listing of the flags and sectors.
+
+rpadd
+	 Usage: rpadd 
+	 Adds a new room program to the end of the current program list.
+	 
+show a - Show object/mobile/player/room totals by zone.	 
+show r <zone> [low][high]- Show names and exit informations for these rooms.	 
+show s                   - Show grand totals for building and pfiles.
+show u <zone>            - Show a list of undescribed rooms in given zone.
++++++++++++++++++++++ CREATE ROOMS +++++++++++++++++++++++++
+
+rinit
+	Usage: rinit <room vnum>
+	Creates a new room. You must use goto, rexit, or rlink to get to the
+	room to work with it. 
+
+rdelete
+	Usage: rdelete <room vnum>
+	Delete the specified room and all connections to/from that room.
+
++++++++++++++++++++++ ROOM WIDE +++++++++++++++++++++++++
+
+rflags 
+	Usage: rflags [flag | ?]
+	With no argument, it will list the flags for the current room. If a
+	room flag is used as the argument, it will toggle that flag. Using
+	the ? will give a listing of all flags available.  (Note: In the
+	orginal distribution of the SOI engine, there are two helpfiles
+	available, rflag and rflags. The first one explains all of the room
+	flag types, and the second one is just a summary.)
+ 
+rsector 
+	Usage: rsector [sectortype | ?]
+	With no argument, it will list the sector for the current room. If a
+	rsector flag is used as the argument, it will toggle that flag.
+	Using the ? will give a listing of all sectors available, as well as
+	movement costs, and other notes.
+
+rname 
+	Usage: rname <room name>
+	This will create a name or change the name of the room you are
+	currently in.
+	
+rdesc
+	Usage: rdesc [reformat]
+	Allows entry of a new description for the room you are currently
+	in. With no arguments, it will send you into the editor to enter
+	your description.  Use "rdesc reformat" to ensure
+	proper formating once you are done with the description.
+
+rset
+	Usage: rset [<weather> | alas <direction>]
+	rset <weather> can be used to give the room a different description
+	depending on 'weather' such as foggy, rainy, day or night. A complete
+	listing of available 'weather' descriptions can be found with the command
+	"tags weather-room". "rdesc reformat" will not work on weather-descriptions,
+	so be certain the formating is correct.
+	
+	"rset alas" is used to give an alternate message to a direction that cannot
+	be used. For example if there is no exit to the west, then "rset alas w"
+	will allow you to give the player a message when they try to move west. 
+	
+rappend
+	Usage: rappend
+	To add material to a pre-existing room description. (Note: remeber
+	to use "rdesc reformat" when you are done)
+	
++++++++++++++++++++++ DOORS AND EXITS +++++++++++++++++++++++++
+**On the commands below "Direction" must be one of (n, e, s, w, u, d).
+
+rlink 
+	Usage: rlink <direction><target room>
+	Creates a two-way connection between the room you are currently in 
+	and the target room. Both rooms must exist before you try to link 
+	them. The link is removed by using the "rlinkrm" command.
+
+rlinkrm 
+	Usage: rlinkrm <direction>
+	Removes a two-way link between two rooms in the direction specified.
+	The doors and other exit descriptions are also removed.
+
+rexit 
+	Usage: rexit <directio><target room>
+	Creates a one-way passage in the specified direction to the
+	target room from the current room. Both rooms must exist. The exit
+	is removed with the REXITRM command.
+
+rexitrm
+	Usage: rexitrm <direction>
+	Removes a one-way link to the room in the direction specified.
+	The doors and other exit descriptions are also removed.
+	
+rdoor 
+	Usage: rdoor <direction> [keyword(s)] 
+	Creates a door in the specified direction, if a link or one-way exit
+	exists in that direction. A keyword may be specified if desired; the
+	default is "door". 
+
+rkey 
+	Usage: rkey <direction><key number(VNUM)><pick penalty> 
+	Allows the door in the direction given to be locked and
+	unlocked using a key with the specified VNUM. A pick penalty can be
+	set also. Creation and placement of this key is the responsibility
+	of the builder,
+
+rdflag 
+	Usage: rdflag <direction> <flag>  
+	If this command is used with just a direction, it will ask for a
+	flag from exit-bits. At this time, only pickproff is functional. See
+	the flags section for the full list of exit-bits.
+	
+rset
+	Usage: rset alas <direction>
+	"rset alas" is used to give an alternate message to a direction that cannot
+	be used. For example if there is no exit to the west, then "rset alas w"
+	will allow you to give the player a message when they try to move west.
+	
++++++++++++++++++++++ EXTRA DETAILS +++++++++++++++++++++++++
+
+rddesc
+	Usage: rddesc <direction>
+	Adds a description for an exit (a door does not need to
+	be present) in the specified direction. You will be prompted
+	for the description after entering the command.
+
+
+rcret
+	Usage: rcret <direction><difficulty>
+	RCRET creates a secret description which can only be found through
+	a successful use of the SEARCH skill. The difficulty will be a
+	number from 0 to 100. Please note that a difficulty of 50 or
+	greater, due to modifications in the code, will be IMPOSSIBLE to
+	find. A good range is 0-20, with a preference to the more
+	conservative numbers. Once the command is entered, you will go to
+	the editor to type the actual description you desire.
+
+
+redesc
+	Usage: redesc <keyword(s)>
+	Adds a keyword and extra description for something in the current
+	room. After the command with the keyword is given, you will be
+	prompted for a description. This is useful for describing signs and
+	anything else that need not be an object or will not be taken from
+	the room.
+
++++++++++++++++++++ FLAGS, SECTORS, and EXIT-BITS ++++++++++++++++++++
+
+rflag
+	The flags and their functions are:
+
+   Dark            - Room will be dark even in daytime. Torches still
+					 work.
+
+   Light           - Room will always be lighted.
+
+   NoMob           - Mobiles will not move into this room.
+
+   Indoors         - Weather/sunrises/sunsets/etc cannot be seen.
+
+   Lawful          - Crimes commited in this area will flag the
+   					 criminal.
+
+   NoMagic         - Spells cannot be cast.
+
+   SafeQuit        - Players can quit the game here.
+
+   Fall            - Anyone entering falls to the room below.
+
+   Climb           - Requires a climb check to enter room.
+
+   <Deity>         - Sets the room to be a temple of <Deity>.
+
+   NoMount         - Mounts cannot be ridden into this room.
+
+   Psave           - Objects left in room will save and not disappear.
+
+   Lab             - Allows alchemy.
+
+   NoMerchant      - Merchants won't wander in to sell their goods.
+
+   OOC             - Creates an OOC area. USE SPARINGLY!
+
+**NoPray and NoMagic don't appear to work, but are never used. Also, Diety is not implemented at this time.
+
+The following flags have no effect other than on mobs similarly
+flagged for access with the "mset access TYPE" command:
+
+Ruins           Tunnel             Cave              Wild
+Deep            Temple             Road              Wealthy
+Poor            Scum               Dock              Market Arena
+
++++++++++++++++++++
+
+rsector
+	The sectors and their functions are:
+
+
+        Sector Type     Base Move Cost  Special
+        -----------     --------------  -------
+        Inside          1               None
+        
+        City            1               None
+        
+        Road            2               None
+        
+        Trail           3               None
+        
+        Field           4               Allows Camping
+        
+        Woods           5               Allows Camping
+        
+        Forest          6               Allows Camping
+        
+        Hills           7               Allows Camping
+        
+        Mountains       8               None
+        
+        Swamp           8               None
+        
+        Underwater      6               Too Much Encumberance and You
+										Drown
+        
+        Lake            ?               Allows sinking to linked
+										Underwater
+        
+        River           ?               Allows sinking to linked
+										Underwater
+        
+        Ocean           15              Allows Boats
+        
+        Dock            2               Allows You to Exit a Boat
+        
+        Reef            15              Causes Damage to a Boat
+        
+        Crowsnest       8               Unknown
+        
+**Some sectors exist in name only, such as Reef, Ocean, and Crowsnest
+        
++++++++++++++++++++
+
+exit-bits
+
+	The exit-bits and their functions are:
+	
+	
+	Closed
+	IsDoor
+	Locked
+	PickProof
+	RSClosed
+	RSLocked
+	Secret
+	Trapped
+	Toll  
+	
+**At this time, only PickProof is implemented.	
+
++++++++++++++++++++++ CREDIT +++++++++++++++++++++++++
+
+This manual is dervived from various help files, the code itself, posts at the Shadows of Isildur forum, and hours of trial and error. It is my contribution to the RPI community. My thanks to Sighentist, Dragongold, Tsheller, HaiWolfe, and of course, Traithe, as well as all of the others at http://www.middle-earth.us/forums/viewforum.php?f=31. 
+
+As with all programming, be careful with it, and don't blame me when your computer crashes.  If you have any comments or helpful advice, you can post at the forum or email me. Please direct all questions to the forum. 
+
